@@ -1,0 +1,102 @@
+html, body {
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+}
+
+body {
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	background: linear-gradient(
+		174deg, 
+		#040d15 58%, 
+		rgba(12,112,138,1) 89%, 
+		rgba(0,212,255,1) 98%);
+	color: white;
+}
+
+nav{
+	--radius: 130px;
+	--angle: 45deg;
+	--top: 50%;
+	--right: 50%;
+	--menuHeight: 75px;
+	--menuWidth: 75px;
+	grid-column: 1/2;
+	--offsetCenter: 12px;
+	position: relative;
+}
+
+nav button{
+	height: var(--menuHeight);
+	width: var(--menuWidth);
+	position:absolute;
+	top: var(--top);
+	right: var(--right);
+	font-family: 'Poppins', sans-serif;
+	text-decoration: none;
+	color:#145995;
+	text-transform: uppercase;
+	font-size: 18px;
+	letter-spacing: 2px;
+	border: none;
+	border-radius: 100%;
+	box-shadow: 0px 1px 19px 5px darkslategrey; 
+	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%);
+}
+
+.connector {
+
+	--angle: -45deg;
+	--height: 40px;
+	position: absolute;
+	bottom: calc( 100% - var(--top) - var(--menuHeight)/2 - var(--height)/2);
+	right: calc(100% - var(--right) + var(--menuWidth)/2 - var(--radius)/2);
+	width: var(--radius);
+	height: 48px;
+	border: solid 1px white;
+	border-radius: 25%;
+	/* transform: translate(calc(var(--radius)/2)); */
+}
+.skills { --angle: 45deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
+.hobbies { --angle: 0deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
+.exps { --angle: -45deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
+
+nav button:hover{
+	box-shadow: 0px 1px 19px 5px darkslategrey, inset 0px 1px 13px 11px darkslategrey;
+	transition: all 1s ease;
+}
+
+nav button:active{
+	box-shadow: none;
+	background: none;
+	transition: all 1s ease;
+}
+
+main{
+	grid-column: 2/4;
+}
+
+h1 { 
+	text-align: center;
+	margin-top: 0px;
+	padding-top: 1em;
+}
+
+footer {
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	left: 0px;
+	bottom: 3px;
+	font-size: 90%;
+}
+
+a {
+	color: white;
+}
+
+.face {
+	border: 2px solid black;
+	border-radius: 10px;
+}
