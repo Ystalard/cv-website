@@ -14,11 +14,33 @@
 	
 	<body onload="new Rubik()">
 		<nav>
-			<button>menu</button>
-			<div class="connector rightConnector">test</div>
+			<button class="menu">menu</button>
+			<div class="connector"></div>
 			<button class="skills">skills</button>
+			<div class="connector"></div>
 			<button class="hobbies">hobbies</button>
+			<div class="connector"></div>
 			<button class="exps">experiences</button>
+			<svg>
+				<filter id="waves">
+					<feTurbulence x=0 y=0 type="turbulence" 
+					basefrequency="0.009" 
+					numOctaves="5"
+					result="turbulence" seed="2">
+						<animate attributeName="baseFrequency" dur="60s" values="0.05;0.005;0.05" repeatCount="indefinite"/>
+					</feTurbulence>
+					<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10"></feDisplacementMap>
+				</filter>
+				<filter id="connector">
+					<feTurbulence x=0 y=0 type="turbulence" 
+					basefrequency="0.05" 
+					numOctaves="5"
+					result="turbulence" seed="2">
+						<animate attributeName="baseFrequency" dur="60s" values="0.05;0.005;0.05" repeatCount="indefinite"/>
+					</feTurbulence>
+					<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5"></feDisplacementMap>
+				</filter>
+			</svg>
 		</nav>
 		<main></main>
 	</body>

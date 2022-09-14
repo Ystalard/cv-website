@@ -16,12 +16,11 @@ body {
 }
 
 nav{
-	--radius: 130px;
-	--angle: 45deg;
+	--radius: 200px;
 	--top: 50%;
-	--right: 50%;
-	--menuHeight: 75px;
-	--menuWidth: 75px;
+	--right: 60%;
+	--menuHeight: 100px;
+	--menuWidth: 100px;
 	grid-column: 1/2;
 	--offsetCenter: 12px;
 	position: relative;
@@ -31,8 +30,8 @@ nav button{
 	height: var(--menuHeight);
 	width: var(--menuWidth);
 	position:absolute;
-	top: var(--top);
-	right: var(--right);
+	top: calc(var(--top) - var(--menuHeight)/2);
+	right: calc(var(--right) - var(--menuWidth)/2);
 	font-family: 'Poppins', sans-serif;
 	text-decoration: none;
 	color:#145995;
@@ -41,36 +40,145 @@ nav button{
 	letter-spacing: 2px;
 	border: none;
 	border-radius: 100%;
+	/* box-shadow: 0px 1px 19px 5px darkslategrey; 
+	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%); */
+	background: none;
+}
+
+nav button::after{
+	content: '';
+	position:absolute;
+	height: inherit;
+	width: inherit;
+	top: 0px;
+	right: 0px;
+	border: none;
+	border-radius: 100%;
 	box-shadow: 0px 1px 19px 5px darkslategrey; 
 	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%);
+	
+	animation: animate 5s linear infinite;
+	z-index: -1;
 }
 
 .connector {
-
-	--angle: -45deg;
 	--height: 40px;
+	--width: 77px;
+	--borderSize: 1px;
 	position: absolute;
-	bottom: calc( 100% - var(--top) - var(--menuHeight)/2 - var(--height)/2);
-	right: calc(100% - var(--right) + var(--menuWidth)/2 - var(--radius)/2);
-	width: var(--radius);
-	height: 48px;
-	border: solid 1px white;
-	border-radius: 25%;
-	/* transform: translate(calc(var(--radius)/2)); */
+	bottom: calc( 100% - var(--top) - var(--height)/2);
+	right: calc(var(--right) - var(--width)/2);
+	width: var(--width);
+	height: var(--height);
+	border-bottom: solid var(--borderSize) white;
+	border-radius: 12%;
+	filter: none;
 }
-.skills { --angle: 45deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
-.hobbies { --angle: 0deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
-.exps { --angle: -45deg; transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); }
 
-nav button:hover{
+.connector::after {
+	content: "";
+	display: block;
+	width: auto;
+	height: 100%;
+	transform: rotate(180deg) translateY(-100%);
+	border-bottom: solid var(--borderSize) white;
+	border-radius: 12%;
+	filter: none;
+ }
+
+ .connector:hover, .connector:hover::after{
+	filter: url(#connector);
+	transition: all 1s ease;
+ }
+
+ @keyframes animate
+ {
+	0%
+	{
+		box-shadow: 0 0 5px #463dcc,
+		inset 0 0 5px #463dcc;
+	}
+	10%
+	{
+		box-shadow: 0 0 15px #463dcc,
+		inset 0 0 15px #463dcc;
+	}
+	20%
+	{
+		box-shadow: 0 0 7px #463dcc,
+		inset 0 0 7px #463dcc;
+	}
+	40%
+	{
+		box-shadow: 0 0 15px #463dcc,
+		inset 0 0 15px #463dcc;
+	}
+	60%
+	{
+		box-shadow: 0 0 10px #463dcc,
+		inset 0 0 10px #463dcc;
+	}
+	80%
+	{
+		box-shadow: 0 0 14px #463dcc,
+		inset 0 0 14px #463dcc;
+	}
+	100%
+	{
+		box-shadow: 0 0 5px #463dcc,
+		inset 0 0 5px #463dcc;
+	}
+ }
+
+ svg{
+	width:0;
+	height:0;
+ }
+
+.skills { 
+	--buttonWidth: var(--menuWidth);
+	--buttonHeight: var(--menuHeight);
+	width: var(--buttonWidth); 
+	height: var(--buttonHeight); 
+	--angle: 45deg;
+	top: calc(var(--top) - var(--buttonHeight)/2);
+	right: calc(var(--right) - var(--buttonWidth)/2); 
+	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+}
+
+.hobbies { 
+	--buttonWidth: var(--menuWidth);
+	--buttonHeight: var(--menuHeight);
+	width: var(--buttonWidth); 
+	height: var(--buttonHeight); 
+	top: calc(var(--top) - var(--buttonHeight)/2);
+	right: calc(var(--right) - var(--buttonWidth)/2); 
+	--angle: 0deg; 
+	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+}
+
+.exps { 
+	--buttonWidth: 180px;
+	--buttonHeight: 180px;
+	width: var(--buttonWidth); 
+	height: var(--buttonHeight); 
+	top: calc(var(--top) - var(--buttonHeight)/2);
+	right: calc(var(--right) - var(--buttonWidth)/2); 
+	--angle: -45deg; 
+	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+}
+
+nav button:hover::after{
 	box-shadow: 0px 1px 19px 5px darkslategrey, inset 0px 1px 13px 11px darkslategrey;
 	transition: all 1s ease;
+	filter: url(#waves);
 }
 
-nav button:active{
+nav button:active::after{
 	box-shadow: none;
 	background: none;
 	transition: all 1s ease;
+	filter: url(#waves);
 }
 
 main{
