@@ -7,18 +7,19 @@ html, body {
 body {
 	display: grid;
 	grid-template-columns: repeat(3,1fr);
-	background: linear-gradient(
+	/* background: linear-gradient(
 		174deg, 
 		#040d15 58%, 
 		rgba(12,112,138,1) 89%, 
-		rgba(0,212,255,1) 98%);
+		rgba(0,212,255,1) 98%); */
+	background-color:#05072e;
 	color: white;
 }
 
 nav{
 	--radius: 200px;
 	--top: 50%;
-	--right: 60%;
+	--right: 75%;
 	--menuHeight: 100px;
 	--menuWidth: 100px;
 	grid-column: 1/2;
@@ -40,8 +41,6 @@ nav button{
 	letter-spacing: 2px;
 	border: none;
 	border-radius: 100%;
-	/* box-shadow: 0px 1px 19px 5px darkslategrey; 
-	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%); */
 	background: none;
 }
 
@@ -53,12 +52,82 @@ nav button::after{
 	top: 0px;
 	right: 0px;
 	border: none;
-	border-radius: 100%;
-	box-shadow: 0px 1px 19px 5px darkslategrey; 
+	border-radius: inherit;
+	box-shadow: 0px 0px 19px 5px darkslategrey; 
 	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%);
-	
 	animation: animate 5s linear infinite;
 	z-index: -1;
+}
+
+nav button::before{
+	content: '';
+	position:absolute;
+	height: inherit;
+	width: inherit;
+	top: 0px;
+	right: 0px;
+	border: none;
+	border-radius: inherit;
+	box-shadow: 0px 0px 19px 5px darkslategrey; 
+	background: radial-gradient(circle, rgba(240,240,240,1) 57%, #184f4f 78%);
+	transform: rotate(-270deg);
+	animation: animate 5s linear infinite;
+	z-index: -1;
+}
+
+nav button:hover::after{
+	background: radial-gradient(circle, rgba(240,240,240,1) 65%, #184f4f 78%);
+	animation: rotateInverse 120s linear infinite, animate 5s linear infinite;
+	filter: url(#waves);
+}
+
+nav button:hover::before{
+	background: radial-gradient(circle, rgba(240,240,240,1) 65%, #184f4f 78%);
+	animation: rotate 120s linear infinite, animate 5s linear infinite;
+	filter: url(#waves);
+}
+
+@keyframes rotate {
+	0%{
+		transform: rotate(0deg);
+	}
+	25%{
+		transform: rotate(90deg);
+	}
+	50%{
+		transform: rotate(180deg);
+	}
+	75%{
+		transform: rotate(270deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotateInverse {
+	0%{
+		transform: rotate(0deg);
+	}
+	25%{
+		transform: rotate(-90deg);
+	}
+	50%{
+		transform: rotate(-180deg);
+	}
+	75%{
+		transform: rotate(-270deg);
+	}
+	100%{
+		transform: rotate(-360deg);
+	}
+}
+
+nav button:active::after, nav button:active::before {
+	box-shadow: none;
+	background: none;
+	transition: all 2s ease;
+	filter: url(#waves);
 }
 
 .connector {
@@ -71,8 +140,10 @@ nav button::after{
 	width: var(--width);
 	height: var(--height);
 	border-bottom: solid var(--borderSize) white;
-	border-radius: 12%;
+	border-top-left-radius: 12%;
 	filter: none;
+	transition: scale .1s linear;
+	scale: 0;
 }
 
 .connector::after {
@@ -83,50 +154,45 @@ nav button::after{
 	transform: rotate(180deg) translateY(-100%);
 	border-bottom: solid var(--borderSize) white;
 	border-radius: 12%;
-	filter: none;
- }
-
- .connector:hover, .connector:hover::after{
-	filter: url(#connector);
-	transition: all 1s ease;
+	filter: inherit;
  }
 
  @keyframes animate
  {
 	0%
 	{
-		box-shadow: 0 0 5px #463dcc,
-		inset 0 0 5px #463dcc;
+		box-shadow: 0 0 5px darkslategrey,
+		inset 0 0 5px darkslategrey;
 	}
 	10%
 	{
-		box-shadow: 0 0 15px #463dcc,
-		inset 0 0 15px #463dcc;
+		box-shadow: 0 0 15px darkslategrey,
+		inset 0 0 15px darkslategrey;
 	}
 	20%
 	{
-		box-shadow: 0 0 7px #463dcc,
-		inset 0 0 7px #463dcc;
+		box-shadow: 0 0 7px darkslategrey,
+		inset 0 0 7px darkslategrey;
 	}
 	40%
 	{
-		box-shadow: 0 0 15px #463dcc,
-		inset 0 0 15px #463dcc;
+		box-shadow: 0 0 15px darkslategrey,
+		inset 0 0 15px darkslategrey;
 	}
 	60%
 	{
-		box-shadow: 0 0 10px #463dcc,
-		inset 0 0 10px #463dcc;
+		box-shadow: 0 0 10px darkslategrey,
+		inset 0 0 10px darkslategrey;
 	}
 	80%
 	{
-		box-shadow: 0 0 14px #463dcc,
-		inset 0 0 14px #463dcc;
+		box-shadow: 0 0 14px darkslategrey,
+		inset 0 0 14px darkslategrey;
 	}
 	100%
 	{
-		box-shadow: 0 0 5px #463dcc,
-		inset 0 0 5px #463dcc;
+		box-shadow: 0 0 5px darkslategrey,
+		inset 0 0 5px darkslategrey;
 	}
  }
 
@@ -140,10 +206,12 @@ nav button::after{
 	--buttonHeight: var(--menuHeight);
 	width: var(--buttonWidth); 
 	height: var(--buttonHeight); 
-	--angle: 45deg;
+	--angle: 50deg;
 	top: calc(var(--top) - var(--buttonHeight)/2);
 	right: calc(var(--right) - var(--buttonWidth)/2); 
 	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+	transition: scale .5s .3s linear;
+	scale: 0;
 }
 
 .hobbies { 
@@ -155,6 +223,8 @@ nav button::after{
 	right: calc(var(--right) - var(--buttonWidth)/2); 
 	--angle: 0deg; 
 	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+	transition: scale .5s .1s linear;
+	scale: 0;
 }
 
 .exps { 
@@ -164,21 +234,18 @@ nav button::after{
 	height: var(--buttonHeight); 
 	top: calc(var(--top) - var(--buttonHeight)/2);
 	right: calc(var(--right) - var(--buttonWidth)/2); 
-	--angle: -45deg; 
+	--angle: -50deg; 
 	transform: translate(var(--offsetCenter)) rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1*var(--angle))); 
+	transition: scale .5s linear;
+	scale: 0;
 }
 
-nav button:hover::after{
-	box-shadow: 0px 1px 19px 5px darkslategrey, inset 0px 1px 13px 11px darkslategrey;
-	transition: all 1s ease;
-	filter: url(#waves);
+.display{
+	scale: 1;
 }
 
-nav button:active::after{
-	box-shadow: none;
-	background: none;
-	transition: all 1s ease;
-	filter: url(#waves);
+.connectorIsHovered{
+	filter: url(#connector);
 }
 
 main{

@@ -1,3 +1,6 @@
+var myCube
+var randomizedStepList = [0,0,0]
+
 Array.prototype.clone = function() {
 	var c = [];
 	var len = this.length;
@@ -213,8 +216,9 @@ Rubik.prototype.init = function() {
 	this._build();
 	this._update();
 	OZ.Event.add(document.body, "mousedown touchstart", this._dragStart.bind(this));
-	
-	// setTimeout(this.randomize.bind(this), 500);
+	myCube = this;
+
+	setTimeout(this.randomize.bind(this), 500);
 }
 
 Rubik.prototype.randomize = function() {
@@ -243,6 +247,7 @@ Rubik.prototype._rotateRandom = function() {
 	var method = "_rotate" + ["X", "Y", "Z"].random();
 	var dir = [-1, 1].random();
 	var layer = Math.floor(Math.random()*Rubik.SIZE);
+	randomizedStepList.add()
 	this[method](dir, layer);
 }
 

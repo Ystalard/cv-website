@@ -6,7 +6,8 @@
 		<script src="js/css3.oz.js"></script>
 		<script src="js/rubik.js"></script>
 		<script src="js/quaternion.js"></script>
-		<script src="js/navButtonConnector.js"></script>
+		<script src="js/navigation.js"></script>
+		<script src="js/manualRotationRubik.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -14,29 +15,40 @@
 	
 	<body onload="new Rubik()">
 		<nav>
-			<button class="menu">menu</button>
-			<div class="connector"></div>
-			<button class="skills">skills</button>
-			<div class="connector"></div>
-			<button class="hobbies">hobbies</button>
-			<div class="connector"></div>
-			<button class="exps">experiences</button>
+			<button class="menu" onClick="buttonClicked(this)" onmouseenter="mouseEntered()" onmouseleave="mouseLeft()">menu</button>
+			<div class="connector skill connectorIsHovered"></div>
+			<button class="skills" onClick="buttonClicked(this)" onmouseenter="mouseEntered('skill')" onmouseleave="mouseLeft('skill')">skills</button>
+			<div class="connector hobby"></div>
+			<button class="hobbies" onClick="buttonClicked(this)" onmouseenter="mouseEntered('hobby')" onmouseleave="mouseLeft('hobby')">hobbies</button>
+			<div class="connector exp"></div>
+			<button class="exps" onClick="buttonClicked(this)" onmouseenter="mouseEntered('exp')" onmouseleave="mouseLeft('exp')">experiences</button>
 			<svg>
 				<filter id="waves">
-					<feTurbulence x=0 y=0 type="turbulence" 
-					basefrequency="0.009" 
+					<feTurbulence x="-30" y="-30" type="turbulence" 
+					basefrequency="0.09" 
 					numOctaves="5"
-					result="turbulence" seed="2">
-						<animate attributeName="baseFrequency" dur="60s" values="0.05;0.005;0.05" repeatCount="indefinite"/>
+					result="turbulence" seed="1000">
+						<animate attributeName="baseFrequency" dur="60s" values="0.09;0.1;0.09" repeatCount="indefinite"/>
+						<!-- <animate attributeName="seed" dur="60s" values="600;700" repeatCount="indefinite"/> -->
+					</feTurbulence>
+					<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10"></feDisplacementMap>
+				</filter>
+				<filter id="waves2">
+					<feTurbulence x="-10" y="-10" type="turbulence" 
+					basefrequency="0.09" 
+					numOctaves="5"
+					result="turbulence" seed="100000">
+						<animate attributeName="baseFrequency" dur="60s" values="0.09;0.009;0.09" repeatCount="indefinite"/>
+						<!-- <animate attributeName="seed" dur="50s" values="0;500" repeatCount="indefinite"/> -->
 					</feTurbulence>
 					<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10"></feDisplacementMap>
 				</filter>
 				<filter id="connector">
-					<feTurbulence x=0 y=0 type="turbulence" 
-					basefrequency="0.05" 
-					numOctaves="5"
-					result="turbulence" seed="2">
-						<animate attributeName="baseFrequency" dur="60s" values="0.05;0.005;0.05" repeatCount="indefinite"/>
+					<feTurbulence x="0" y="0" type="turbulence" 
+					basefrequency="0.09"
+					numOctaves="7"
+					result="turbulence">
+						<animate attributeName="seed" dur=".5s" values="2;7" repeatCount="indefinite"/>
 					</feTurbulence>
 					<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5"></feDisplacementMap>
 				</filter>
